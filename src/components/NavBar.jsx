@@ -7,17 +7,13 @@ import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      const res = await axios.post(
-        BASE_URL + "/logout",
-        {},
-        { withCredentials: true }
-      );
+      await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
-      navigate("/login")
+      navigate("/login");
     } catch (error) {
       // Redirect to error page
     }
@@ -54,7 +50,7 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections">Connections</Link>
               </li>
               <li>
                 <a onClick={() => handleLogout()}>Logout</a>
